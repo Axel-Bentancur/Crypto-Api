@@ -1,0 +1,41 @@
+.list-top {
+  width: 30%;
+  max-width: 270px;
+  border-radius: 15px;
+  padding: 0.1rem;
+  margin: 2rem 1rem;
+  height: 100%;
+}
+.side-text {
+  margin: 0 0 0.25rem;
+}
+
+.top {
+  flex-direction: column;
+  padding: 0.5rem 2rem;
+  color: rgb(0, 98, 226);
+}
+
+.center {
+  text-align: center;
+}
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.info-size {
+  padding: 1rem;
+}
+
+.color0 {
+  color: #ffd700;
+}
+.color1 {
+  color: #c0c0c0;
+}
+.color2 {
+  color: #cd7f32;
+}
