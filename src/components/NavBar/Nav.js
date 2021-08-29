@@ -1,29 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Nav.css";
 import Logo from "./Slime.png";
 
-export default function Nav() {
+export default function Nav({ cryptoList, getCrypto }) {
+  const [text, setText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const onChangeHandler = (text) => {
+    let match = [];
+    if (text.length > 0) {
+      match = cryptoList.filter((crypto) => {
+        let token = crypto.id.toLowerCase().startsWith(text);
+        return token;
+      });
+    }
+    setSuggestions(match);
+    setText(text);
+  };
+
   return (
-    <div className="container">
-      <nav className="navbar">
+    <div id="nav">
+      <div className="nav-container">
         <div className="logo">
           <img src={Logo} alt="Crypto Slime Logo" />
           <span className="logoname">Crypto Slime</span>
         </div>
-        <div className="search">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            className="bi bi-search icon"
-            viewBox="0 0 16 16"
-          >
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-          </svg>
-          <input className="input-search" placeholder="search"></input>
+        <div className="wrapper">
+          <div className="search">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="input-search"
+              value={text}
+              onChange={(e) => onChangeHandler(e.target.value)}
+            />
+            <div className="scroll-container">
+              <div className="autocomplete-box">
+                {suggestions &&
+                  suggestions.map((e, idx) => (
+                    <li key={idx} onClick={(ev) => getCrypto(`${e.id}`)}>
+                      <img src={e.image} alt={e.name} className="logo-crypto" />
+                      <span className="crypto-name">{e.name}</span>
+                      <span className="crypto-symbol">
+                        ({e.symbol.toUpperCase()})
+                      </span>
+                    </li>
+                  ))}
+              </div>
+            </div>
+            <div className="icon">
+              <i className="fas fa-search"></i>
+            </div>
+          </div>
         </div>
-      </nav>
+      </div>
     </div>
   );
 }

@@ -1,52 +1,89 @@
-.navbar {
+#nav {
   display: flex;
-  height: 15vh;
-  width: 100%;
   align-items: center;
+  grid-area: nav;
+  box-shadow: 5px 5px 8px rgba(70, 70, 70, 0.15);
+}
+.nav-container {
+  display: flex;
+  width: 100%;
+  padding: 0 1.5rem;
   justify-content: space-between;
+  align-items: center;
 }
 
 /******************************** LOGO **************************************/
 .logo {
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo .logoname {
-  margin-left: 0.7rem;
-  padding-top: 2.5rem;
-  font-weight: 600;
+  align-items: flex-end;
 }
 .logo img {
-  width: 90px;
-  height: 90px;
+  height: 65px;
+  width: 65px;
+}
+.logo-name {
+  padding-bottom: 5px;
 }
 
-/******************************** FORM **************************************/
+/******************************** SEARCH **************************************/
 .search {
-  display: flex;
-  height: 40px;
-  align-items: center;
-  margin-top: 2rem;
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
   box-shadow: inset 5px 5px 8px rgba(70, 70, 70, 0.15), inset -5px -5px 8px #fff;
-  border-radius: 25px;
-  padding-left: 20px;
 }
 .input-search {
-  height: 100%;
-  font-size: 16px;
+  height: 35px;
+  width: 250px;
+  outline: none;
   border: none;
-  background: none;
-  color: #777;
+  border-radius: 5px;
+  padding: 5px 15px;
+  background-color: transparent;
 }
-.input-search:focus {
-  outline: none !important;
+.icon {
+  position: absolute;
+  padding: 5px;
+  height: 35px;
+  line-height: 35px;
+  top: 0;
+  right: 0;
+  color: rgb(79, 105, 255);
 }
-.input-search::placeholder {
-  color: #bbb;
+.scroll-container {
+  position: absolute;
+  height: 135px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.autocomplete-box {
+  position: relative;
+  width: 294px;
+  max-height: 135px;
+  background-color: #fff;
+  overflow: hidden;
+  overflow-y: scroll;
+  box-shadow: inset 5px 5px 8px rgba(70, 70, 70, 0.15), inset -5px -5px 8px #fff;
+}
+.autocomplete-box li {
+  list-style: none;
+  padding: 7px 15px;
+  cursor: pointer;
 }
 
-.icon {
-  padding-right: 5px;
-  color: #bbb;
+.autocomplete-box li:hover {
+  background-color: rgb(243, 243, 243);
+}
+
+.autocomplete-box li img {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+}
+.autocomplete-box li .crypto-name {
+  margin-left: 10px;
+}
+.autocomplete-box li .crypto-symbol {
+  margin-left: 5px;
 }
