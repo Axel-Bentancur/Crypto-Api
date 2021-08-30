@@ -2,10 +2,9 @@
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr;
-  grid-template-rows: 1.1fr 1.5fr 6fr 1fr;
+  grid-template-rows: 1.1fr 12fr 1fr;
   grid-template-areas:
     "nav"
-    "carrousell"
     "main"
     "footer";
 }
@@ -16,14 +15,9 @@
     grid-template-rows: 1.1fr 1fr 6fr 1fr;
     grid-template-areas:
       "nav"
-      "carrousell"
       "main"
       "footer";
   }
-}
-#sidebar {
-  background-color: rgb(65, 209, 8);
-  grid-area: sidebar;
 }
 #footer {
   background-color: rgb(162, 255, 75);

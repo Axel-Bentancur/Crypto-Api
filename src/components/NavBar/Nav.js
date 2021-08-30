@@ -19,13 +19,21 @@ export default function Nav({ cryptoList, getCrypto }) {
     setText(text);
   };
 
+  const onClickHandler = (id) => {
+    getCrypto(id);
+    setSuggestions([]);
+    setText("");
+  };
+
   return (
     <div id="nav">
       <div className="nav-container">
-        <div className="logo">
-          <img src={Logo} alt="Crypto Slime Logo" />
-          <span className="logoname">Crypto Slime</span>
-        </div>
+        <Link to="/">
+          <div className="logo">
+            <img src={Logo} alt="Crypto Slime Logo" />
+            <span className="logoname">Crypto Slime</span>
+          </div>
+        </Link>
         <div className="wrapper">
           <div className="search">
             <input
@@ -35,17 +43,29 @@ export default function Nav({ cryptoList, getCrypto }) {
               value={text}
               onChange={(e) => onChangeHandler(e.target.value)}
             />
-            <div className="scroll-container">
+            <div
+              className={
+                suggestions.length > 0
+                  ? "scroll-container display"
+                  : "scroll-container display-none"
+              }
+            >
               <div className="autocomplete-box">
                 {suggestions &&
-                  suggestions.map((e, idx) => (
-                    <li key={idx} onClick={(ev) => getCrypto(`${e.id}`)}>
-                      <img src={e.image} alt={e.name} className="logo-crypto" />
-                      <span className="crypto-name">{e.name}</span>
-                      <span className="crypto-symbol">
-                        ({e.symbol.toUpperCase()})
-                      </span>
-                    </li>
+                  suggestions.map((crypto, idx) => (
+                    <Link to={`/crypto/${crypto.id}`} key={idx}>
+                      <li onClick={(e) => onClickHandler(crypto.id)}>
+                        <img
+                          src={crypto.image}
+                          alt={crypto.name}
+                          className="logo-crypto"
+                        />
+                        <span className="crypto-name">{crypto.name}</span>
+                        <span className="crypto-symbol">
+                          ({crypto.symbol.toUpperCase()})
+                        </span>
+                      </li>
+                    </Link>
                   ))}
               </div>
             </div>

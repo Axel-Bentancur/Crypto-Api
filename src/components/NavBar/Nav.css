@@ -66,6 +66,12 @@
   overflow-y: scroll;
   box-shadow: inset 5px 5px 8px rgba(70, 70, 70, 0.15), inset -5px -5px 8px #fff;
 }
+.nav-container a,
+.autocomplete-box a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .autocomplete-box li {
   list-style: none;
   padding: 7px 15px;
@@ -86,4 +92,11 @@
 }
 .autocomplete-box li .crypto-symbol {
   margin-left: 5px;
+}
+.display {
+  display: block;
+}
+.display-none {
+  display: none;
+  z-index: -10;
 }

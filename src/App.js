@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { Route } from "react-router";
 import "./App.css";
 import Nav from "./components/NavBar/Nav";
-import Carrousell from "./components/Carrousell/Carrousell";
 import CryptoTable from "./components/CryptoTable/CryptoTable";
-import LineChart from "./components/LineChart/LineChart";
-/* import CryptoLeftTable from "./components/CryptoSideTable/LeftTable/CryptoLeftTable";
-import CryptoRightTable from "./components/CryptoSideTable/RightTable/CryptoRightTable";
+import CryptoInfo from "./components/CryptoInfo/CryptoInfo";
+//import LineChart from "./components/LineChart/LineChart";
+/*
 import { priceSort, rankSort } from "./sorting.js"; */
 
 function App() {
@@ -57,18 +56,20 @@ function App() {
 
   return (
     <div className="grid-container">
-      <Route exact path="/">
+      <Route path="/">
         <Nav cryptoList={cryptoList} getCrypto={getCrypto} />
-        <Carrousell />
-        <CryptoTable cryptoList={cryptoList} getCrypto={getCrypto} />
-
         <div id="footer">footer</div>
       </Route>
       <Route
-        path={`/crypto/${crypto.id}`}
+        exact
+        path="/"
         render={() => (
-          <LineChart lista={crypto.market_data.sparkline_7d.price} />
+          <CryptoTable cryptoList={cryptoList} getCrypto={getCrypto} />
         )}
+      />
+      <Route
+        path={`/crypto/${crypto.id}`}
+        render={() => <CryptoInfo crypto={crypto} />}
       />
     </div>
   );
@@ -76,7 +77,9 @@ function App() {
 
 export default App;
 
-/* <LineChart lista={cryptoList} />
+/* 
+<LineChart lista={crypto.market_data.sparkline_7d.price} />
+<LineChart lista={cryptoList} />
   <button onClick={() => handleToggle(priceSort)}>X</button>
         <button onClick={() => handleToggle(rankSort)}>R</button> 
         <CryptoLeftTable cryptoList={cryptoList} />

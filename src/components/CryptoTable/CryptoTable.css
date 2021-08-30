@@ -1,9 +1,9 @@
 #main {
   grid-area: main;
-  align-items: center;
-  padding: 1rem 4rem;
+  margin: 2rem 2rem;
+  /* align-items: center;
   max-width: 1000px;
-  margin: auto;
+  margin: auto; */
 }
 .table-primary th {
   font-size: 14px;
