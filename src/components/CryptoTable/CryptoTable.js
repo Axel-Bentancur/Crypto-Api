@@ -1,8 +1,20 @@
 import React from "react";
-import "./CryptoTable.css";
 import { Link } from "react-router-dom";
 
-export default function CryptoTable({ cryptoList, getCrypto }) {
+/** COMPONENTS **/
+import Pagination from "../Pagination/Pagination";
+
+/** STYLES **/
+import "./CryptoTable.css";
+
+export default function CryptoTable({
+  cryptoList,
+  getCrypto,
+  totalCryptos,
+  cryptosPerPage,
+  paginateNumber,
+  currentPage,
+}) {
   function currencyFormat(num) {
     return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -18,7 +30,7 @@ export default function CryptoTable({ cryptoList, getCrypto }) {
 
   return (
     <div id="main">
-      <div className="table-responsive-sm">
+      <div className="table-responsive-sm m-4">
         <table className="table table-hover">
           <thead>
             <tr className="table-primary">
@@ -71,21 +83,13 @@ export default function CryptoTable({ cryptoList, getCrypto }) {
             ))}
           </tbody>
         </table>
+        <Pagination
+          totalCryptos={totalCryptos}
+          cryptosPerPage={cryptosPerPage}
+          paginateNumber={paginateNumber}
+          currentPage={currentPage}
+        />
       </div>
     </div>
   );
 }
-
-/* <div className="table-info">
-        <div className="info">
-          <span className="row-info rank">#</span>
-          <span className="row-info name">Name</span>
-          <span className="row-info price">Price</span>
-          <span className="row-info day">24h %</span>
-          <span className="row-info week">7d %</span>
-          <span className="row-info market">Market Cap</span>
-        </div>
-      </div>
-      {cryptoList.map((data) => (
-        <CryptoRow cryptoData={data} key={data.id} />
-      ))} */

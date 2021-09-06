@@ -26,6 +26,7 @@
       "chart"
       "side-info"
       "desc";
+    margin: 2rem 1rem;
   }
   #info-right {
     margin-left: 0;
@@ -156,7 +157,6 @@
 }
 .card-li {
   display: flex;
-  /*   background-color: #00ecc815; */
   justify-content: space-between;
   padding: 10px;
 

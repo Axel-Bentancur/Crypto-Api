@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Nav.css";
+
+/** COMPONENTS **/
 import Logo from "./Slime.png";
 
-export default function Nav({ cryptoList, getCrypto }) {
+/** STYLES **/
+import "./Nav.css";
+
+export default function Nav({ cryptoList, getCrypto, paginateNumber }) {
   const [text, setText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
@@ -11,7 +15,9 @@ export default function Nav({ cryptoList, getCrypto }) {
     let match = [];
     if (text.length > 0) {
       match = cryptoList.filter((crypto) => {
-        let token = crypto.id.toLowerCase().startsWith(text);
+        let token =
+          crypto.id.toLowerCase().startsWith(text) ||
+          crypto.symbol.toLowerCase().startsWith(text);
         return token;
       });
     }
@@ -28,7 +34,7 @@ export default function Nav({ cryptoList, getCrypto }) {
   return (
     <div id="nav">
       <div className="nav-container">
-        <Link to="/">
+        <Link to="/" onClick={() => paginateNumber(1)}>
           <div className="logo">
             <img src={Logo} alt="Crypto Slime Logo" />
             <span className="logoname">Crypto Slime</span>
