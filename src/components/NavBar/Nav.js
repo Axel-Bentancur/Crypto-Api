@@ -7,26 +7,25 @@ import Logo from "./Slime.png";
 /** STYLES **/
 import "./Nav.css";
 
-export default function Nav({ cryptoList, getCrypto, paginateNumber }) {
+export default function Nav({ cryptoList }) {
   const [text, setText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
 
   const onChangeHandler = (text) => {
-    let match = [];
+    let matches = [];
     if (text.length > 0) {
-      match = cryptoList.filter((crypto) => {
+      matches = cryptoList.filter((crypto) => {
         let token =
           crypto.id.toLowerCase().startsWith(text) ||
           crypto.symbol.toLowerCase().startsWith(text);
         return token;
       });
     }
-    setSuggestions(match);
+    setSuggestions(matches);
     setText(text);
   };
 
-  const onClickHandler = (id) => {
-    getCrypto(id);
+  const onClickHandler = () => {
     setSuggestions([]);
     setText("");
   };
@@ -34,7 +33,7 @@ export default function Nav({ cryptoList, getCrypto, paginateNumber }) {
   return (
     <div id="nav">
       <div className="nav-container">
-        <Link to="/" onClick={() => paginateNumber(1)}>
+        <Link to="/">
           <div className="logo">
             <img src={Logo} alt="Crypto Slime Logo" />
             <span className="logoname">Crypto Slime</span>
@@ -60,7 +59,7 @@ export default function Nav({ cryptoList, getCrypto, paginateNumber }) {
                 {suggestions &&
                   suggestions.map((crypto, idx) => (
                     <Link to={`/crypto/${crypto.id}`} key={idx}>
-                      <li onClick={(e) => onClickHandler(crypto.id)}>
+                      <li onClick={onClickHandler}>
                         <img
                           src={crypto.image}
                           alt={crypto.name}

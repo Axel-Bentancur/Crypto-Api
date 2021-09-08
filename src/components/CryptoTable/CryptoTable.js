@@ -1,32 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 /** COMPONENTS **/
 import Pagination from "../Pagination/Pagination";
+import { currency, percentage, currencyVol } from "../Helpers/Helpers.js";
 
 /** STYLES **/
 import "./CryptoTable.css";
 
-export default function CryptoTable({
-  cryptoList,
-  getCrypto,
-  totalCryptos,
-  cryptosPerPage,
-  paginateNumber,
-  currentPage,
-}) {
-  function currencyFormat(num) {
-    return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, ",");
-  }
+export default function CryptoTable({ cryptoList }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cryptosPerPage] = useState(25);
 
-  function procentFormat(num) {
-    let porcent = num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, ",");
-    if (porcent < 0) {
-      return `${porcent}%`;
-    } else {
-      return `${porcent}%`;
-    }
-  }
+  const paginateNumber = (number) => {
+    setCurrentPage(number);
+  };
+
+  const indexOfLastCrypto = currentPage * cryptosPerPage;
+  const indexOfFirstCrypto = indexOfLastCrypto - cryptosPerPage;
+  const currentCryptos = cryptoList.slice(
+    indexOfFirstCrypto,
+    indexOfLastCrypto
+  );
 
   return (
     <div id="main">
@@ -44,13 +39,10 @@ export default function CryptoTable({
             </tr>
           </thead>
           <tbody>
-            {cryptoList.map((crypto) => (
+            {currentCryptos.map((crypto) => (
               <tr key={crypto.id}>
                 <th scope="row">{crypto.market_cap_rank}</th>
-                <td
-                  className="crypto-link"
-                  onClick={(e) => getCrypto(crypto.id)}
-                >
+                <td className="crypto-link">
                   <Link to={`/crypto/${crypto.id}`}>
                     <div className="crypto-name-container">
                       <img
@@ -67,7 +59,7 @@ export default function CryptoTable({
                     {crypto.symbol.toUpperCase()}
                   </span>
                 </td>
-                <td className="fw-6">{currencyFormat(crypto.current_price)}</td>
+                <td className="fw-6">{currency(crypto.current_price)}</td>
                 <td
                   className={
                     crypto.price_change_percentage_24h > 0
@@ -75,16 +67,16 @@ export default function CryptoTable({
                       : "fw-6 negative"
                   }
                 >
-                  {procentFormat(crypto.price_change_percentage_24h)}
+                  {percentage(crypto.price_change_percentage_24h)}
                 </td>
-                <td className="fw-6">{currencyFormat(crypto.market_cap)}</td>
-                <td className="fw-6">{currencyFormat(crypto.total_volume)}</td>
+                <td className="fw-6">{currencyVol(crypto.market_cap)}</td>
+                <td className="fw-6">{currencyVol(crypto.total_volume)}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <Pagination
-          totalCryptos={totalCryptos}
+          totalCryptos={cryptoList.length}
           cryptosPerPage={cryptosPerPage}
           paginateNumber={paginateNumber}
           currentPage={currentPage}
