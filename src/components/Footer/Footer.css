@@ -5,6 +5,9 @@
 .footer {
   height: 12vh;
 }
+.t-right {
+  text-align: right;
+}
 
 @media only screen and (max-width: 550px) {
   .responsive-footer {

@@ -8,7 +8,7 @@ export default function Footer() {
         <span className="col-md-4 mb-0 text-muted text-position">
           © 2021 Durpha, Inc
         </span>
-        <span className="col-md-4 mb-0 text-muted text-position">
+        <span className="col-md-4 mb-0 text-muted text-position t-right">
           Aplicacion Creada por Axel Bentancur
         </span>
       </footer>
