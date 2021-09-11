@@ -5,3 +5,12 @@
 .footer {
   height: 12vh;
 }
+
+@media only screen and (max-width: 550px) {
+  .responsive-footer {
+    flex-direction: column;
+  }
+  .text-position {
+    text-align: center;
+  }
+}

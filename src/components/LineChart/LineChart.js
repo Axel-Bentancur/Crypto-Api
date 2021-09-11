@@ -52,10 +52,11 @@ export default function LineChart({ lista }) {
         position: "top",
         display: false,
       }, //--> position y visualizacion del indicador.
-      title: { text: "title grafic", display: true }, //--> texto y visualizacion del titulo del grafico.
+      //title: { text: "title grafic", display: true }, //--> texto y visualizacion del titulo del grafico.
     },
     scales: {
       x: {
+        display: false,
         ticks: {
           callback: function (val, index) {
             // Hide the label of every 2nd dataset
@@ -84,11 +85,7 @@ export default function LineChart({ lista }) {
     },
   };
 
-  return (
-    <div className="asd">
-      <Line data={data} options={options} />
-    </div>
-  );
+  return <Line data={data} options={options} />;
 }
 
 /*   function newList(e) {

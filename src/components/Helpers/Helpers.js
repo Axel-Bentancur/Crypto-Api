@@ -39,4 +39,9 @@ const percentage = (num) => {
   }
 };
 
-export { percentage, currency, getCrypto, getCryptos, currencyVol };
+const numb = (num) => {
+  const formatter = new Intl.NumberFormat("en-US");
+  return formatter.format(num);
+};
+
+export { percentage, currency, currencyVol, numb, getCrypto, getCryptos };

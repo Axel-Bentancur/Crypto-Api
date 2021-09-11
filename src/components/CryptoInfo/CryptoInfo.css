@@ -1,37 +1,17 @@
 .crypto-grid-container {
   display: grid;
-  height: 100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
   grid-template-areas:
-    "header header header header header header"
-    "info-left info-left info-right info-right empty empty"
-    "info-link-l info-link-l info-link-r info-link-r empty empty"
-    "chart chart chart chart side-info side-info"
-    "desc desc desc desc desc desc";
+    "header header"
+    "info-left info-right"
+    "info-link-l info-link-r"
+    "chart chart"
+    "desc desc";
   grid-gap: 0.3rem;
   margin: 2rem 4rem;
 }
 
-@media only screen and (max-width: 550px) {
-  .crypto-grid-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: 0fr;
-    grid-template-areas:
-      "header"
-      "info-left"
-      "info-right"
-      "info-link-l"
-      "info-link-r"
-      "chart"
-      "side-info"
-      "desc";
-    margin: 2rem 1rem;
-  }
-  #info-right {
-    margin-left: 0;
-  }
-}
 /************************************* HEADER ****************************************************/
 #header {
   grid-area: header;
@@ -111,12 +91,8 @@
 /************************************* INFO-LINK-L ****************************************************/
 #info-link-l {
   grid-area: info-link-l;
-  margin: 1rem 0;
-  margin-right: 0.5rem;
 }
 .info-links {
-  max-width: 800px;
-  min-width: 600px;
   margin-bottom: 0.2rem;
 }
 .info-links a button {
@@ -138,32 +114,11 @@
 /************************************* INFO-LINK-R ****************************************************/
 #info-link-r {
   grid-area: info-link-r;
-  margin: 1rem 0;
-  margin-left: 0.5rem;
 }
 
 /************************************* CHART ****************************************************/
 #chart {
   grid-area: chart;
-}
-
-/************************************* SIDE-INFO ****************************************************/
-#side-info {
-  grid-area: side-info;
-}
-.card-title {
-  font-size: 20px;
-  font-weight: bold;
-}
-.card-li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-
-  align-items: center;
-  font-weight: 500;
-  font-size: 13px;
-  color: #999;
 }
 
 /************************************* DESCRIPTION ****************************************************/
@@ -172,5 +127,26 @@
 }
 #description-text p {
   font-size: 13px;
-  padding-bottom: 1rem;
+  text-align: justify;
+}
+
+/************************************* MEDIA ****************************************************/
+@media only screen and (max-width: 550px) {
+  .crypto-grid-container {
+    grid-template-columns: calc(100vw - 2rem);
+    grid-template-rows: auto;
+    grid-template-areas:
+      "header"
+      "info-left"
+      "info-right"
+      "info-link-l"
+      "info-link-r"
+      "chart"
+      "desc";
+    margin: 2rem 1rem;
+  }
+  #info-right,
+  #info-link-r {
+    margin-left: 0;
+  }
 }

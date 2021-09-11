@@ -34,7 +34,8 @@
 }
 .input-search {
   height: 35px;
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   outline: none;
   border: none;
   border-radius: 5px;
@@ -99,4 +100,11 @@
 .display-none {
   display: none;
   z-index: -10;
+}
+
+/************************************* MEDIA ****************************************************/
+@media only screen and (max-width: 550px) {
+  .logoname {
+    display: none;
+  }
 }

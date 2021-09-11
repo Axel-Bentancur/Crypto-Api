@@ -29,10 +29,7 @@ function App() {
 
   return (
     <div className="grid-container">
-      <Route path="/">
-        <Nav cryptoList={cryptoList} />
-        <Footer />
-      </Route>
+      <Nav cryptoList={cryptoList} />
       <Route
         exact
         path="/"
@@ -44,6 +41,7 @@ function App() {
         path={`/crypto/:cryptoId`}
         render={({ match }) => <CryptoInfo match={match} />}
       />
+      <Footer />
     </div>
   );
 }

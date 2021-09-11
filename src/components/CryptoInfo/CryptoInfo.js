@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 /** COMPONENTS **/
 import LineChart from "../LineChart/LineChart";
 import Loader from "../Loader/Loader";
-import { getCrypto, currency, percentage } from "../Helpers/Helpers";
+import { getCrypto, currency, percentage, numb } from "../Helpers/Helpers";
 
 /** STYLES **/
 import "./CryptoInfo.css";
@@ -70,25 +70,44 @@ export default function CryptoInfo({ match }) {
           <div id="info-left">
             <div className="crypto-data-options">
               <span>Market Cap</span>
-              <span className="num-data">{`${crypto.market_data.market_cap.usd} US$`}</span>
+              <span className="num-data">{`${currency(
+                crypto.market_data.market_cap.usd
+              )}`}</span>
             </div>
             <div className="crypto-data-options">
-              <span>24 Hour Trading Vol</span>
-              <span className="num-data">{`${crypto.market_data.total_volume.usd} US$`}</span>
+              <span>Trading Volume</span>
+              <span className="num-data">{`${currency(
+                crypto.market_data.total_volume.usd
+              )}`}</span>
+            </div>
+            <div className="crypto-data-options">
+              <span>24h Low / 24h Max Price</span>
+              <span className="num-data">{`${currency(
+                crypto.market_data.low_24h.usd
+              )} / ${currency(crypto.market_data.high_24h.usd)}`}</span>
             </div>
           </div>
           <div id="info-right">
             <div className="crypto-data-options">
               <span>Circulating Supply</span>
-              <span className="num-data">{`${crypto.market_data.circulating_supply} US$`}</span>
+              <span className="num-data">{`${numb(
+                crypto.market_data.circulating_supply
+              )}`}</span>
             </div>
             <div className="crypto-data-options">
               <span>Total Supply</span>
               <span className="num-data">
                 {crypto.market_data.total_supply
-                  ? crypto.market_data.total_supply
+                  ? numb(crypto.market_data.total_supply)
                   : "∞"}
               </span>
+            </div>
+            <div className="crypto-data-options">
+              <span>Volume/Market Cap</span>
+              <span className="num-data">{`${numb(
+                crypto.market_data.total_volume.usd /
+                  crypto.market_data.market_cap.usd
+              )}`}</span>
             </div>
           </div>
           <div id="info-link-l">
@@ -132,48 +151,6 @@ export default function CryptoInfo({ match }) {
           <div id="chart">
             <LineChart lista={crypto.market_data.sparkline_7d.price} />
           </div>
-          <div id="side-info">
-            <div>
-              <div className="card card-width bg-tr">
-                <div className="card-header card-title">
-                  {`${crypto.symbol.toUpperCase()} Price and Market Stats`}
-                </div>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item card-li">
-                    <span>{`${crypto.name} Price`}</span>
-                    <span className="num-data">{`$${currency(
-                      crypto.market_data.current_price.usd
-                    )}`}</span>
-                  </li>
-                  <li className="list-group-item card-li">
-                    <span>Market Cap</span>
-                    <span className="num-data">{`$${crypto.market_data.market_cap.usd}`}</span>
-                  </li>
-                  <li className="list-group-item card-li">
-                    <span>Trading Volume</span>
-                    <span className="num-data">{`$${crypto.market_data.total_volume.usd}`}</span>
-                  </li>
-                  <li className="list-group-item card-li">
-                    <span>Volume/Market Cap</span>
-                    <span className="num-data">{`${currency(
-                      crypto.market_data.total_volume.usd /
-                        crypto.market_data.market_cap.usd
-                    )}`}</span>
-                  </li>
-                  <li className="list-group-item card-li">
-                    <span>24h Low / 24h High</span>
-                    <span className="num-data">{`${crypto.market_data.high_24h.usd} / ${crypto.market_data.low_24h.usd}`}</span>
-                  </li>
-                  <li className="list-group-item card-li">
-                    <span>Market Cap Rank</span>
-                    <span className="num-data">
-                      {`#${crypto.market_cap_rank}`}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
           {paragraph ? (
             <div id="desc">
               <div id="description-text">
@@ -187,3 +164,5 @@ export default function CryptoInfo({ match }) {
     );
   }
 }
+
+/* inside chart <LineChart lista={crypto.market_data.sparkline_7d.price} /> */

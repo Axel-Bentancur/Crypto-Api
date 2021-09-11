@@ -1,6 +1,9 @@
 #main {
   grid-area: main;
 }
+.table-size {
+  margin: 1.4rem 1.4rem;
+}
 .table-primary th {
   font-size: 14px;
   font-weight: 600;
@@ -34,4 +37,10 @@
 }
 .negative {
   color: #ea3943;
+}
+
+@media only screen and (max-width: 550px) {
+  .table-size {
+    margin: 1.4rem 0;
+  }
 }

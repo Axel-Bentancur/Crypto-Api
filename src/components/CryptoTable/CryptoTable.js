@@ -25,7 +25,7 @@ export default function CryptoTable({ cryptoList }) {
 
   return (
     <div id="main">
-      <div className="table-responsive-sm m-4">
+      <div className="table-responsive-sm table-size">
         <table className="table table-hover">
           <thead>
             <tr className="table-primary">
@@ -75,13 +75,13 @@ export default function CryptoTable({ cryptoList }) {
             ))}
           </tbody>
         </table>
-        <Pagination
-          totalCryptos={cryptoList.length}
-          cryptosPerPage={cryptosPerPage}
-          paginateNumber={paginateNumber}
-          currentPage={currentPage}
-        />
       </div>
+      <Pagination
+        totalCryptos={cryptoList.length}
+        cryptosPerPage={cryptosPerPage}
+        paginateNumber={paginateNumber}
+        currentPage={currentPage}
+      />
     </div>
   );
 }
